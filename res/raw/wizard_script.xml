@@ -131,9 +131,6 @@
         <result wizard:action="oem_post_setup" />
     </WizardAction>
     <WizardAction wizard:uri="intent:#Intent;package=org.lineageos.setupwizard;action=org.lineageos.setupwizard.LINEAGE_RESTORE_BACKUP;end" id="oem_post_setup">
-        <result wizard:action="recovery_update" />
-    </WizardAction>
-    <WizardAction wizard:uri="intent:#Intent;package=org.lineageos.setupwizard;action=org.lineageos.setupwizard.LINEAGE_RECOVERY_UPDATE;end" id="recovery_update">
         <result wizard:action="theme_settings" />
     </WizardAction>
     <WizardAction wizard:uri="intent:#Intent;package=org.lineageos.setupwizard;action=org.lineageos.setupwizard.THEME_SETTINGS;end" id="theme_settings">
