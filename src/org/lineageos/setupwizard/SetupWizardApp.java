@@ -66,13 +66,6 @@ public class SetupWizardApp extends Application {
         }
         sStatusBarManager = SetupWizardUtils.disableStatusBar(this);
         mHandler.postDelayed(mRadioTimeoutRunnable, SetupWizardApp.RADIO_READY_TIMEOUT);
-        if (SetupWizardUtils.hasGMS(this)) {
-            SetupWizardUtils.disableHome(this);
-            if (SetupWizardUtils.isOwner()) {
-                Settings.Global.putInt(getContentResolver(),
-                        Settings.Global.ASSISTED_GPS_ENABLED, 1);
-            }
-        }
     }
 
     public static StatusBarManager getStatusBarManager() {
