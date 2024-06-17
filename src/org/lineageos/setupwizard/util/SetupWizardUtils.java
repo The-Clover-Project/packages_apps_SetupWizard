@@ -16,7 +16,6 @@ import static android.telephony.TelephonyManager.PHONE_TYPE_GSM;
 import static com.google.android.setupcompat.util.ResultCodes.RESULT_SKIP;
 
 import static org.lineageos.setupwizard.SetupWizardApp.LOGV;
-import static org.lineageos.setupwizard.SetupWizardApp.NAVIGATION_OPTION_KEY;
 
 import android.app.StatusBarManager;
 import android.app.WallpaperManager;
@@ -41,9 +40,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-
-import lineageos.hardware.LineageHardwareManager;
-import lineageos.providers.LineageSettings;
 
 import org.lineageos.setupwizard.BaseSetupWizardActivity;
 import org.lineageos.setupwizard.SetupWizardApp;
@@ -144,7 +140,6 @@ public class SetupWizardUtils {
                     Settings.Secure.TV_USER_SETUP_COMPLETE, 1);
         }
 
-        handleNavigationOption();
         WallpaperManager.getInstance(context).forgetLoadedWallpaper();
         disableHome(context);
         enableStatusBar();
@@ -219,35 +214,6 @@ public class SetupWizardUtils {
             int enabledState) {
         context.getPackageManager().setComponentEnabledSetting(componentName,
                 enabledState, DONT_KILL_APP);
-    }
-
-    private static void handleNavigationOption() {
-        Bundle settingsBundle = SetupWizardApp.getSettingsBundle();
-        if (settingsBundle.containsKey(NAVIGATION_OPTION_KEY)) {
-            IOverlayManager overlayManager = IOverlayManager.Stub.asInterface(
-                    ServiceManager.getService(Context.OVERLAY_SERVICE));
-            String selectedNavMode = settingsBundle.getString(NAVIGATION_OPTION_KEY);
-
-            try {
-                overlayManager.setEnabledExclusiveInCategory(selectedNavMode,
-                        UserHandle.USER_CURRENT);
-            } catch (Exception ignored) {
-            }
-        }
-    }
-
-    private static void writeDisableNavkeysOption(Context context, boolean enabled) {
-        final boolean virtualKeysEnabled = LineageSettings.System.getIntForUser(
-                context.getContentResolver(), LineageSettings.System.FORCE_SHOW_NAVBAR, 0,
-                UserHandle.USER_CURRENT) != 0;
-        if (enabled != virtualKeysEnabled) {
-            LineageSettings.System.putIntForUser(context.getContentResolver(),
-                    LineageSettings.System.FORCE_SHOW_NAVBAR, enabled ? 1 : 0,
-                    UserHandle.USER_CURRENT);
-
-            final LineageHardwareManager hardware = LineageHardwareManager.getInstance(context);
-            hardware.set(LineageHardwareManager.FEATURE_KEY_DISABLE, enabled);
-        }
     }
 
     public static long getBuildDateTimestamp() {

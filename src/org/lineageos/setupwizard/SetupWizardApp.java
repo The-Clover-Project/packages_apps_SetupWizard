@@ -40,8 +40,6 @@ public class SetupWizardApp extends Application {
 
     public static final String IGNORE_SIM_LOCALE_PROP = "ro.setupwizard.ignore_sim_locale";
 
-    public static final String NAVIGATION_OPTION_KEY = "navigation_option";
-
     public static final int RADIO_READY_TIMEOUT = 10 * 1000;
 
     private static StatusBarManager sStatusBarManager;
