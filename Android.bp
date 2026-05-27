@@ -1,16 +1,17 @@
 //
 // SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-FileCopyrightText: 2024-2026 The Clover Project
 // SPDX-License-Identifier: Apache-2.0
 //
 
 android_app {
-    name: "LineageSetupWizard",
+    name: "CloverSetupWizard",
 
     srcs: ["src/**/*.java"],
 
     certificate: "platform",
     privileged: true,
-    privapp_allowlist: "org.lineageos.setupwizard.xml",
+    privapp_allowlist: "com.clover.setupwizard.xml",
     system_ext_specific: true,
     platform_apis: true,
 
@@ -26,7 +27,6 @@ android_app {
         "setupcompat",
         "setupdesign",
         "SystemUISharedLib",
-        "org.lineageos.platform.internal",
     ],
 
     libs: ["telephony-common"],
